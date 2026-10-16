@@ -3,25 +3,49 @@
 require_once __DIR__ . '/../src/validaciones.php';
 
 $casos = [
-    ["Teclado",true],
+    ["Teclado", true],
     ["", false],
-    ["", false],
+    ["AB", false],
     ["Mouse", true]
+];
+
+$casosCantidad = [
+    [10, true],
+    [1, true],
+    [0, true],
+    [-5, false]
 ];
 
 $pasaron = 0;
 $fallaron = 0;
 
-foreach ($casos as [$entrada, $esperado]){
+echo "PRUEBAS DE NOMBRE\n";
+
+foreach ($casos as [$entrada, $esperado]) {
     $obtenido = validarNombreProducto($entrada);
+
     if ($obtenido === $esperado) {
-        echo"PASS\n";
+        echo "PASS - Probe el nombre: '$entrada'\n";
         $pasaron++;
     } else {
-        echo "FAIL\n";
+        echo "FAIL - Probe el nombre: '$entrada'\n";
         $fallaron++;
     }
 }
 
-echo "\nTotal PASS: $pass\n";
-echo "Total FAIL: $fail\n";
+echo "\nPRUEBAS DE CANTIDAD\n";
+
+foreach ($casosCantidad as [$entrada, $esperado]) {
+    $obtenido = validarCantidadProducto($entrada);
+
+    if ($obtenido === $esperado) {
+        echo "PASS - Probe la cantidad: $entrada\n";
+        $pasaron++;
+    } else {
+        echo "FAIL - Probe la cantidad: $entrada\n";
+        $fallaron++;
+    }
+}
+
+echo "\nTotal PASS: $pasaron\n";
+echo "Total FAIL: $fallaron\n";
